@@ -7,6 +7,7 @@ import formattedDate from '@/lib/formatDate';
 import ScrollTop from '@/app/components/ScrollTop';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers'
 
 // export async function generateMetadata({slug}:any){
 //    const blog = getBloggdata(slug)
@@ -65,7 +66,8 @@ export default async function page({ params }: { params: { slug: string } }) {
             </div>
           </header>
 
-          <MDXRemote source={props.content} />
+          {/* @ts-expect-error Server Component*/}
+          <MDXRemote source={props.content}  components={{...GetAllMDXComponents()}} options={{...GetMdxOptions()}} />
         </div>
       </div>
     </>
