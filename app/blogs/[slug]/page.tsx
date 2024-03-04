@@ -1,13 +1,14 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import formattedDate from '@/lib/formatDate';
-import ScrollTop from '@/app/components/ScrollTop';
+import Image from "next/image";
+import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import formattedDate from "@/lib/formatDate";
+import ScrollTop from "@/app/components/ScrollTop";
 
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers'
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { GetAllMDXComponents, GetMdxOptions } from "@/lib/mdxHelpers";
+import TableOfContents from "@/app/components/TableOfContents";
 
 // export async function generateMetadata({slug}:any){
 //    const blog = getBloggdata(slug)
@@ -19,10 +20,10 @@ import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers'
 // }
 
 export async function generateStaticParams() {
-  const files = fs.readdirSync(path.join('blogdata'));
+  const files = fs.readdirSync(path.join("blogdata"));
 
   const paths = files.map((filename) => ({
-    slug: filename.replace('.mdx', ''),
+    slug: filename.replace(".mdx", ""),
   }));
 
   return paths;
@@ -30,8 +31,8 @@ export async function generateStaticParams() {
 
 function getBloggdata({ slug }: { slug: string }) {
   const markdownFile = fs.readFileSync(
-    path.join('blogdata', slug + '.mdx'),
-    'utf-8'
+    path.join("blogdata", slug + ".mdx"),
+    "utf-8"
   );
   const { data: frontMatter, content } = matter(markdownFile);
 
@@ -46,6 +47,9 @@ export default async function page({ params }: { params: { slug: string } }) {
   const props = getBloggdata(params);
   return (
     <>
+      <div className="">
+        <TableOfContents source={getBloggdata({ slug: params.slug })} />
+      </div>
       <ScrollTop />
       <div>
         <div className="p-4 md:p-0 prose prose-sm md:prose-base lg:prose-md prose-slate !prose-invert max-w-[800px] mx-auto">
@@ -60,14 +64,18 @@ export default async function page({ params }: { params: { slug: string } }) {
                 fill
                 sizes="100vw"
                 style={{
-                  objectFit: 'cover',
+                  objectFit: "cover",
                 }}
               />
             </div>
           </header>
 
           {/* @ts-expect-error Server Component*/}
-          <MDXRemote source={props.content}  components={{...GetAllMDXComponents()}} options={{...GetMdxOptions()}} />
+          <MDXRemote
+            source={props.content}
+            components={{ ...GetAllMDXComponents() }}
+            options={{ ...GetMdxOptions() }}
+          />
         </div>
       </div>
     </>

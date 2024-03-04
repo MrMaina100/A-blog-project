@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter";
+import { getBloggdata } from "@/lib/getBloggdata";
+import { useParams } from 'next/navigation'
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -10,13 +16,34 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children,params
 }: Readonly<{
   children: React.ReactNode;
+  params:any
 }>) {
+  function getBloggdata({ slug }: { slug: string }) {
+    const markdownFile = fs.readFileSync(
+      path.join("blogdata", slug + ".mdx"),
+      "utf-8"
+    );
+    const { data: frontMatter, content } = matter(markdownFile);
+
+    return {
+      frontMatter,
+      slug,
+      content,
+    };
+  }
+
+
+  console.log(params)
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      
+        {children}
+      </body>
     </html>
   );
 }
