@@ -15,8 +15,9 @@ export function GetMdxOptions(){
         mdxOptions: {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
-            [rehypeHighlight, { languages: true }],
-            rehypeSlug
+            // [rehypeHighlight, { languages: true }],
+            rehypeSlug,
+            
         ],
         }
     }

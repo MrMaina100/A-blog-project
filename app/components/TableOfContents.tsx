@@ -60,11 +60,8 @@ const useIntersectionObserver: UseIntersectionObserverType = (setActiveId) => {
   }, [setActiveId]);
 };
 
-type Props = {
-  source: Blogpost[];
-};
 
-const TableOfContents = ({ source }) => {
+const TableOfContents = ({ source }:any) => {
   const pathname = usePathname();
 
   if (pathname === "/") {
@@ -75,9 +72,9 @@ const TableOfContents = ({ source }) => {
   const filtered = source;
   const headingLines = filtered.content
     .split("\n")
-    .filter((line) => line.match(/^###?\s/));
+    .filter((line:any) => line.match(/^###?\s/));
 
-  const headings = headingLines.map((raw) => {
+  const headings = headingLines.map((raw:any) => {
     const text = raw.replace(/^###*\s/, "");
     const level = raw.slice(0, 3) === "###" ? 3 : 2;
     const slugger = new GithubSlugger();
@@ -94,20 +91,20 @@ const TableOfContents = ({ source }) => {
   useIntersectionObserver(setActiveId);
 
   return (
-    <div className="fixed right-0 top-0 h-screen px-4 py-6">
-      <p className="mb-5 text-lg font-semibold text-white transition-colors dark:text-gray-100">
+    <div className="mt-12">
+      <p className=" mb-5 text-lg font-semibold text-white transition-colors dark:text-gray-100">
         Table of Contents
         {/* <p className="text-red-500">{activeId}</p> */}
       </p>
       <div className="flex flex-col items-start justify-start">
-        {headings.map((heading, index) => {
+        {headings.map((heading:any, index:string) => {
           return (
             <button
               key={index}
               type="button"
               className={clsx(
                 heading.id === activeId
-                  ? "font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  ? "font-medium text-red-500 hover:text-primary-600 dark:hover:text-primary-400"
                   : "font-normal text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200",
                 heading.level === 3 && "pl-4",
                 "mb-3 text-left text-sm transition-colors hover:underline"
