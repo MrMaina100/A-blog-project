@@ -5,6 +5,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import formattedDate from '@/lib/formatDate';
 import ScrollTop from '@/app/components/ScrollTop';
+import Balancer from 'react-wrap-balancer'
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers';
@@ -49,10 +50,13 @@ export default async function page({ params }: { params: { slug: string } }) {
     <>
       <ScrollTop />
       <div>
-        <div className="p-4 md:p-0 prose prose-sm md:prose-base lg:prose-md prose-slate !prose-invert max-w-[840px] mx-auto">
-          <header className="py-3.5">
-            <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 transition-colors dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-              {props.frontMatter.title}
+        <div className="p-4 md:p-0 max-w-[840px] mx-auto">
+          <header className="py-3.5 space-y-6">
+
+            <h1 className=" text-2xl font-extrabold leading-9 tracking-tight  transition-colors dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+              <Balancer>
+                {props.frontMatter.title}
+              </Balancer>
             </h1>
             <div className="relative h-[200px]  md:h-[360px]">
               <Image
@@ -66,8 +70,10 @@ export default async function page({ params }: { params: { slug: string } }) {
               />
             </div>
           </header>
-          <div className="pb-8 transition-colors lg:grid lg:grid-cols-4 lg:gap-x-16">
-            <div className=' pb-8 transition-colors  lg:col-span-3 w-[95%]'>
+
+
+          <div className="pb-8 transition-colors lg:grid lg:grid-cols-4 lg:gap-x-8 mt-10">
+            <div className=' pb-8 transition-colors  lg:col-span-3 w-[95%]  prose prose-sm md:prose-base lg:prose-md prose-slate dark:prose-invert'>
               <MDXRemote
                 source={props.content}
                 components={{ ...GetAllMDXComponents() }}

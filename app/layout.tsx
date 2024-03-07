@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider"
 
-import path from "path";
-import fs from "fs";
-import matter from "gray-matter";
-import { getBloggdata } from "@/lib/getBloggdata";
-import { useParams } from 'next/navigation'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,29 +16,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
   params:any
-}>) {
-  function getBloggdata({ slug }: { slug: string }) {
-    const markdownFile = fs.readFileSync(
-      path.join("blogdata", slug + ".mdx"),
-      "utf-8"
-    );
-    const { data: frontMatter, content } = matter(markdownFile);
-
-    return {
-      frontMatter,
-      slug,
-      content,
-    };
-  }
-
-
-  console.log(params)
+}>) { 
 
   return (
     <html lang="en">
       <body className={inter.className}>
       
-        {children}
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
       </body>
     </html>
   );

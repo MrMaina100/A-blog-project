@@ -91,8 +91,8 @@ const TableOfContents = ({ source }:any) => {
   useIntersectionObserver(setActiveId);
 
   return (
-    <div className="mt-12">
-      <p className=" mb-5 text-lg font-semibold text-white transition-colors dark:text-gray-100">
+    <div className="  w-full">
+      <p className=" mb-5 text-lg font-semibold transition-colors dark:text-gray-100">
         Table of Contents
         {/* <p className="text-red-500">{activeId}</p> */}
       </p>

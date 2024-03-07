@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { DarkButton } from "./components/DarkButton"
+
 
 export default function page() {
   return (
@@ -9,6 +11,8 @@ export default function page() {
 
         </Link>
       </button>
+
+      <DarkButton/>
     </div>
   )
 }
