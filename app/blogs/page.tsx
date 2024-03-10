@@ -5,20 +5,14 @@ import { DarkButton } from '../components/DarkButton';
 export default function page() {
   return (
     <div className="max-w-[1100px]  mx-auto flex flex-col space-y-4">
-      <h1 className="text-4xl ">Together blog posts</h1>
-      <DarkButton/> <p>press for dark/light mode</p>
-      <div className="relative h-[200px] md:h-[400px]">
-        <Image
-          src={thisimg}
-          alt="home image"
-          fill
-          placeholder="blur"
-          sizes="100vw"
-          style={{
-            objectFit: 'cover',
-          }}
-        />
-      DarkButton</div>
+      <h1 className="pb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 transition-colors dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 mt-4">Example blog posts</h1>
+      <div className='flex space-x-2 items-center'>
+      <DarkButton/>
+       <p>press for dark/light mode</p>
+
+
+      </div>
+      
     
       <Blogs />
     </div>
