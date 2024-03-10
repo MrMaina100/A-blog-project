@@ -63,11 +63,13 @@ const useIntersectionObserver: UseIntersectionObserverType = (setActiveId) => {
 
 const TableOfContents = ({ source }:any) => {
   const pathname = usePathname();
+  const [activeId, setActiveId] = useState<string>();
+
+  useIntersectionObserver(setActiveId);
 
   if (pathname === "/") {
     return null;
   }
-  // console.log(pathname.split("/")[2]);
 
   const filtered = source;
   const headingLines = filtered.content
@@ -85,10 +87,6 @@ const TableOfContents = ({ source }:any) => {
       id: slugger.slug(text),
     };
   });
-
-  const [activeId, setActiveId] = useState<string>();
-
-  useIntersectionObserver(setActiveId);
 
   return (
     <div className="  w-full">
