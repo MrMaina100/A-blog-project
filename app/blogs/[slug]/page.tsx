@@ -19,7 +19,7 @@ type Props = {
 
 export async function generateMetadata(
   {params}: Props,
-  parent: ResolvedMetadata
+  
 ):Promise<Metadata>{
 
   const blog = getBloggdata(params)
