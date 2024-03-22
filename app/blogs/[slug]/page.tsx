@@ -36,7 +36,7 @@ export async function generateMetadata(
         {
           url:ogImage,
           width:1024,
-          height:576,
+          height:900,
           alt: blog.frontMatter.title
 
         }
