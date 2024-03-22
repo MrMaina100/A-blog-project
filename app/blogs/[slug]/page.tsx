@@ -23,6 +23,9 @@ export async function generateMetadata(
 ):Promise<Metadata>{
 
   const blog = getBloggdata(params)
+  const image = blog.frontMatter.image
+
+  const ogImage = image && `https://example-blogzz.vercel.app/${image}`
 
   return {
     title: blog.frontMatter.title,
@@ -30,7 +33,7 @@ export async function generateMetadata(
     openGraph:{
       images:[
         {
-          url:blog.frontMatter.image,
+          url:ogImage,
           width:1024,
           height:576,
           alt: blog.frontMatter.title
@@ -44,7 +47,7 @@ export async function generateMetadata(
       description: blog.frontMatter.summary,
        images:[
         {
-          url:blog.frontMatter.image,
+          url:ogImage,
           width:1024,
           height:576,
           alt: blog.frontMatter.title
