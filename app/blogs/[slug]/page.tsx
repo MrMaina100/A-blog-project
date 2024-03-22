@@ -12,6 +12,8 @@ import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers';
 import TableOfContents from '@/app/components/TableOfContents';
 
 import { Metadata, ResolvedMetadata } from 'next';
+import { Suspense } from 'react';
+import { ImageSkeleton } from '@/components/skeleton';
 
 type Props = {
   params: {slug:string}
@@ -101,7 +103,9 @@ export default async function page({ params }: { params: { slug: string } }) {
                 {props.frontMatter.title}
               </Balancer>
             </h1>
+            <Suspense fallback={<ImageSkeleton/>}>
             <div className="relative h-[200px]  md:h-[360px]">
+
               <Image
                 src={props.frontMatter.image}
                 alt="image"
@@ -112,6 +116,7 @@ export default async function page({ params }: { params: { slug: string } }) {
                 }}
               />
             </div>
+            </Suspense>
           </header>
 
 
