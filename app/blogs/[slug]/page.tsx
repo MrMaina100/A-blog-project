@@ -31,6 +31,7 @@ export async function generateMetadata(
     title: blog.frontMatter.title,
     description: blog.frontMatter.summary,
     openGraph:{
+      
       images:[
         {
           url:ogImage,
@@ -39,7 +40,10 @@ export async function generateMetadata(
           alt: blog.frontMatter.title
 
         }
-      ]
+      ],
+      url: `https://example-blogzz.vercel.app/blogs/${blog.slug}`
+      
+
     },
 
     twitter:{
