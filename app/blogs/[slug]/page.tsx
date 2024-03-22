@@ -11,14 +11,50 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { GetAllMDXComponents, GetMdxOptions } from '@/lib/mdxHelpers';
 import TableOfContents from '@/app/components/TableOfContents';
 
-// export async function generateMetadata({slug}:any){
-//    const blog = getBloggdata(slug)
+import { Metadata, ResolvedMetadata } from 'next';
 
-//    return {
-//       title: blog.frontMatter.title,
+type Props = {
+  params: {slug:string}
+}
 
-//    }
-// }
+export async function generateMetadata(
+  {params}: Props,
+  parent: ResolvedMetadata
+):Promise<Metadata>{
+
+  const blog = getBloggdata(params)
+
+  return {
+    title: blog.frontMatter.title,
+    description: blog.frontMatter.summary,
+    openGraph:{
+      images:[
+        {
+          url:blog.frontMatter.image,
+          width:1024,
+          height:576,
+          alt: blog.frontMatter.title
+
+        }
+      ]
+    },
+
+    twitter:{
+      title:blog.frontMatter.title,
+      description: blog.frontMatter.summary,
+       images:[
+        {
+          url:blog.frontMatter.image,
+          width:1024,
+          height:576,
+          alt: blog.frontMatter.title
+
+        }
+      ]
+
+    }
+  }
+}
 
 export async function generateStaticParams() {
   const files = fs.readdirSync(path.join('blogdata'));

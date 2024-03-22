@@ -4,10 +4,18 @@ import Link from 'next/link';
 import formattedDate from '@/lib/formatDate';
 import { useState } from 'react';
 
-export default function Blogs({blogs}:any) {
+
+export default function Blogs({blogs}:{blogs:{
+  title:string,
+  date: string,
+  summary:string,
+  image: string,
+  slug: string
+
+}[]}) {
   // const blogs = sortedPostsData();
   const [searchValue, setSearchValue] = useState('')
-  const filteredBlogs = blogs.filter((blog:any)=> blog.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+  const filteredBlogs = blogs.filter((blog)=> blog.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
 
   return (
     <div>
