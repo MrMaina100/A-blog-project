@@ -1,6 +1,6 @@
 import Blogs from './Blogs';
 import Image from 'next/image';
-import thisimg from '../../public/static/house2.jpg';
+// import thisimg from '../../public/static/house2.jpg';
 import { DarkButton } from '../components/DarkButton';
 import { sortedPostsData } from '@/lib/posts';
 export default function page() {
