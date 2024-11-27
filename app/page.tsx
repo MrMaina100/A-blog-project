@@ -1,5 +1,16 @@
 import Link from "next/link"
 import { DarkButton } from "./components/DarkButton"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title:'Example blog',
+  description:'Example blog example for people to see and clients to reach',
+  keywords:[
+    'example blog',
+    'nextjs example blog'
+  ],
+ 
+}
 
 
 export default function page() {
